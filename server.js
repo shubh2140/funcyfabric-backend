@@ -1,23 +1,15 @@
-// server.js
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
-// Route 1: Hello API
+app.get("/", (req, res) => {
+  res.send("Hello from Vercel!");
+});
+
 app.get("/api/hello", (req, res) => {
-  res.json({ message: "Hello from Vercel!" });
+  res.json({ message: "Hello from API!" });
 });
 
-// Route 2: Status API
-app.get("/api/status", (req, res) => {
-  res.json({ status: "Server is running smoothly!" });
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
-
-// Start server (for local testing)
-if (process.env.NODE_ENV !== "vercel") {
-  app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-  });
-}
-
-module.exports = app;
