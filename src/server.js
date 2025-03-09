@@ -1,14 +1,12 @@
 const express = require("express");
-const productRoutes = require("./routes/productRoutes"); // ✅ Ensure correct path
+const productRoutes = require("./routes/productRoutes");
+require("./config/db"); // Ensure DB connection
 
 const app = express();
 
-app.use(express.json()); // ✅ Middleware to parse JSON
-
-// API Routes
+app.use(express.json()); // Middleware to parse JSON
 app.use("/api/products", productRoutes);
 
-// Default route
 app.get("/", (req, res) => {
   res.send("Welcome to the Vercel Deployed API!");
 });

@@ -1,12 +1,13 @@
-const { getAllProducts } = require("../models/productModel");
+const pool = require("../config/db");
 
-const fetchAllProducts = async (req, res) => {
+const getProducts = async (req, res) => {
   try {
-    const products = await getAllProducts();
-    res.json(products); // ✅ Return products as JSON
+    const result = await pool.query("SELECT * FROM products");
+    res.json(result.rows);
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error("❌ Error fetching products:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 
-module.exports = { fetchAllProducts };
+module.exports = { getProducts };
