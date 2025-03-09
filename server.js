@@ -1,22 +1,23 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path'); // ✅ Import path module
-require('dotenv').config(); // ✅ Load environment variables
-
-const authRoutes = require('./routes/authRoutes');
-const productsRoutes = require('./routes/products'); // ✅ Import product routes
-
+// server.js
+const express = require("express");
 const app = express();
+const port = process.env.PORT || 3000;
 
-app.use(express.json()); // ✅ Enables JSON parsing
-app.use(cors()); // ✅ Enables CORS
+// Route 1: Hello API
+app.get("/api/hello", (req, res) => {
+  res.json({ message: "Hello from Vercel!" });
+});
 
-// ✅ Serve static files from "uploads" folder
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Route 2: Status API
+app.get("/api/status", (req, res) => {
+  res.json({ status: "Server is running smoothly!" });
+});
 
-// ✅ Register routes
-app.use('/api/auth', authRoutes);
-app.use('/api/products', productsRoutes); // ✅ Register product routes
+// Start server (for local testing)
+if (process.env.NODE_ENV !== "vercel") {
+  app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+  });
+}
 
-const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+module.exports = app;
