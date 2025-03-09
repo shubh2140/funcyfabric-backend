@@ -1,9 +1,9 @@
 const express = require("express");
-const productRoutes = require("./routes/productRoutes"); // Correct path
+const productRoutes = require("./src/routes/productRoutes"); // ✅ Ensure correct path
 
 const app = express();
 
-app.use(express.json()); // Middleware to parse JSON
+app.use(express.json()); // ✅ Middleware to parse JSON
 
 // API Routes
 app.use("/api/products", productRoutes);
