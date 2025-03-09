@@ -1,16 +1,16 @@
 const express = require("express");
-const productRoutes = require("./routes/productRoutes"); // Ensure correct path
+const productRoutes = require("./routes/productRoutes"); // Correct path
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json()); // Middleware to parse JSON
 
-// Mount product routes
-app.use("/api/products", productRoutes); 
+// API Routes
+app.use("/api/products", productRoutes);
 
 // Default route
 app.get("/", (req, res) => {
   res.send("Welcome to the Vercel Deployed API!");
 });
 
-module.exports = app; // ✅ Correct for Vercel
+module.exports = app; // ✅ Export app for Vercel
